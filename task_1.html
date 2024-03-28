@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Задача №1</title>
+  </head>
+  <body>
+    <h1>Знайти суми елементів у вказаній області</h1>
+    <ol>
+      <li>номери рядків від 0 до половини, стовпці від 0 до половини</li>
+      <li>номери рядків від 0 до половини, стовпці від половини до кінця</li>
+      <li>номери рядків від половини до кінця, стовпці від 0 до половини</li>
+      <li>
+        номери рядків від половини до кінця , стовпці від половини до кінця
+      </li>
+      <li>Суму парних рядків</li>
+      <li>Суму непарних стовпців</li>
+      <li>У парних рядках – непарні стовпці, у непарних – парні.</li>
+    </ol>
+    <script>
+      // 1) номери рядків від 0 до половини, стовпці від 0 до половини
+      let numList = [
+        [119, 91, 182, 104],
+        [167, 142, 30, 125],
+        [141, 37, 47, 177],
+        [73, 1, 186, 54],
+      ];
+      let halfLength = numList.length / 2;
+      function getSumEl(
+        numList,
+        rowStart,
+        rowEnd,
+        columnStart,
+        columnEnd,
+        stepForRow = 1,
+        stepForColumns = 1
+      ) {
+        let sum = 0;
+        for (let row = rowStart; row < rowEnd; row += stepForRow) {
+          for (
+            let column = columnStart;
+            column < columnEnd;
+            column += stepForColumns
+          ) {
+            sum += numList[row][column];
+          }
+        }
+        return sum;
+      }
+      let sumElForUpperLeftSquare = getSumEl(
+        numList,
+        0,
+        halfLength,
+        0,
+        halfLength
+      );
+      document.write(
+        `<h3>1. Сума рядків від 0 до половини, стовпці від 0 до половини - ${sumElForUpperLeftSquare}</h3>`
+      );
+      console.log(numList);
+      // 2) номери рядків від 0 до половини, стовпці від половини до кінця
+      let sumElForUpperRightSquare = getSumEl(
+        numList,
+        0,
+        halfLength,
+        halfLength,
+        numList.length
+      );
+      document.write(
+        `<h3>2. Сума рядків від 0 до половини, стовпці від половини до кінця - ${sumElForUpperRightSquare}</h3>`
+      );
+      // 3) номери рядків від половини до кінця, стовпці від 0 до половини
+      let sumElForLowerLeftSquare = getSumEl(
+        numList,
+        halfLength,
+        numList.length,
+        0,
+        halfLength
+      );
+      document.write(
+        `<h3>3. Сума рядків від половини до кінця, стовпці від 0 до половини - ${sumElForLowerLeftSquare}</h3>`
+      );
+      // 4) номери рядків від половини до кінця , стовпці від половини до кінця
+      let sumElForLowerRightSquare = getSumEl(
+        numList,
+        halfLength,
+        numList.length,
+        halfLength,
+        numList.length
+      );
+      document.write(
+        `<h3>4. Сума рядків від половини до кінця , стовпці від половини до кінця - ${sumElForLowerRightSquare}</h3>`
+      );
+      // 5) Суму парних рядків
+      let sumForEvenRow = getSumEl(
+        numList,
+        1,
+        numList.length,
+        0,
+        numList.length,
+        2
+      );
+      document.write(`<h3>5. Сума парних рядків - ${sumForEvenRow}</h3>`);
+      // 6) Суму непарних стовпців
+      let sumEvenEvenRow = getSumEl(
+        numList,
+        0,
+        numList.length,
+        0,
+        numList.length,
+        2
+      );
+      document.write(`<h3>6. Сума непарних рядків - ${sumEvenEvenRow}</h3>`);
+      // 7) У парних рядках – непарні стовпці, у непарних – парні.
+      let sumForEvenRowAndOddColumns = getSumEl(
+        numList,
+        1,
+        numList.length,
+        0,
+        numList.length,
+        2,
+        2
+      );
+      let sumForOddRowAndEvenColumns = getSumEl(
+        numList,
+        0,
+        numList.length,
+        1,
+        numList.length,
+        2,
+        2
+      );
+      document.write(
+        `<h3>7. У парних рядках – непарні стовпці сума ${sumForEvenRowAndOddColumns}<br> У непарних – парні - ${sumForOddRowAndEvenColumns}</h3>`
+      );
+    </script>
+  </body>
+</html>
